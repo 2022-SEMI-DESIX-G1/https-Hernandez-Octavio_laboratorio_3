@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab#3</title>
+    <style>
+        body{
+            background-color: rgb(255, 255, 255);
+            font-family: sans-serif;
+        }
+        p{
+           margin: 0;
+            padding: 1rem ;
+            color: rgb(122, 121, 121) ;
+        }
+        h3{
+            margin-bottom: 0;
+        }
+        h2 {
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <h3>Problema#2</h3>
+    <label for="">Ingrese La palabra a contar</label>
+    <input type="text" name="" id="texto">
+    <button type="submit" onclick="contar()">Enviar</button>
+    <p id="resultado"></p>
+    <hr>
+    <h3>Problema#3</h3>
+    <label for="">Ingrese el año a verificar </label>
+    <input type="text" name="" id="year">
+    <button type="submit" onclick="verificar()">Enviar</button>
+    <hr>
+    <h3>Problema#4</h3>
+    <label for="">Ingrese un numero</label>
+    <input type="text" name="" id="primo">
+    <button type="submit" onclick="verificarPrimo()">Enviar</button>
+    
+
+
+</body>
+<script>
+    // Problema #2 
+    //Escribir una función que, dada una cadena "t", retorne la cantidad de caracteres de la cadena.
+    function contar() {
+        // Capturas el valor del input, lo limpas de espacios al inicio y al final y luego haces un arreglo
+        const texto = document.getElementById('texto').value.trim().toLowerCase().split('');
+        // Creamos un objeto que será el que almacene las repeticiones
+        const repeticiones = {};
+        
+        // Ciclamos el texto del input y verificamos si existe y sumamos 1, de no existir siempre valdrá 1
+        texto.forEach( ( letra ) => {
+            repeticiones[ letra ] = ( repeticiones[ letra ] || 0 ) + 1;
+        });
+        
+        // Ahora ciclamos el objeto y lo agregamos al resultado
+        for( let letra in repeticiones ) {
+            const text = `${ letra } = ${ repeticiones[ letra ] }<br>`;
+            document.getElementById('resultado').innerHTML += text;
+        }
+}
+    // Problema #3 
+    //Escribir una función que, dado un año "a", retorne si ese año es bisiesto o no
+    function verificar(){
+        var anio = document.getElementById('year').value;
+        if(anio != 0){
+            if((anio%4==0)&&(anio%100 !=0 || anio%400==0)){
+                alert("El año es viciesto");
+            }
+            else 
+                alert("El año No es Biciesto");
+        }
+        else 
+            alert("Ingrese datos validos o llene el campo")
+    }
+
+    // Problema #4 
+    function verificarPrimo(){
+        var c =parseInt(document.getElementById('primo').value);
+        var numerosPrimos = [];
+        var isPrime =true ;
+        if(c>=2){
+                for (let i = 2; i<c; i++) {
+                    if (c % i == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime) {
+                        console.log(`${c} ES UN NUMERO PRIMO`);
+                    for (var j=2; j < c+1; j++) {
+                        if (primo(j)) {
+                            numerosPrimos.push(j);
+                        }
+                    }
+                    console.log(numerosPrimos);
+                    console.log(calcularSum());
+                } 
+            else {
+                console.log(`${c} NO ES UN NUMERO PRIMO`);
+                }
+        }
+        else 
+            alert("Error: El numero ingresado no es primo o debe ingresar un numero mayor");
+
+
+        function primo(numero) {
+            for (var i = 2; i < numero; i++) {
+                if (numero % i === 0) {
+                return false;
+                }
+            }
+            return numero !== 1;
+        }
+        function calcularSum(){
+            var sum=0;
+            for(var i=0; i <numerosPrimos.length; i++) {
+                sum += numerosPrimos[i];
+            }
+            return alert("La sumatoria es igual a :"+sum);
+        }   
+    }
+
+    
+
+
+
+
+</script>
+</html>
